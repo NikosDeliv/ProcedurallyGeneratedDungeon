@@ -282,9 +282,9 @@ namespace DungeonGenerator
 
         public bool MakeRoom(int x, int y, int xlength, int ylength, Direction direction)
         {
-            // define the dimensions of the room, it should be at least 4x4 tiles (2x2 for walking on, the rest is walls)
-            int xlen = this.GetRand(4, xlength);
-            int ylen = this.GetRand(4, ylength);
+            // define the dimensions of the room
+            int xlen = this.GetRand(6, xlength);
+            int ylen = this.GetRand(6, ylength);
 
             // the tile type it's going to be filled with
             const Tile Floor = Tile.DirtFloor;
@@ -405,10 +405,6 @@ namespace DungeonGenerator
             // start with making the "standard stuff" on the map
             this.Initialize();
 
-            /*******************************************************************************
-            And now the magic of the random-map-generation-algorithm begins!
-            *******************************************************************************/
-
             // start with making a room in the middle, which we can start building upon
             this.MakeRoom(this._xsize / 2, this._ysize / 2, 8, 6, RandomDirection()); 
 
@@ -431,7 +427,7 @@ namespace DungeonGenerator
                 int ymod = 0;
                 Direction? validTile = null;
 
-                // 1000 chances to find a suitable object (room or corridor)..
+                // 1000 chances to find a suitable object (room or corridor)
                 for (int testing = 0; testing < 1000; testing++)
                 {
                     newx = this.GetRand(1, this._xsize - 1);
@@ -560,8 +556,9 @@ namespace DungeonGenerator
 
         void AddSprinkles()
         {
-            // sprinkle out the bonusstuff (stairs, chests etc.) over the map
-            int state = 0; // the state the loop is in, start with the stairs
+            // sprinkle out the bonusstuff over the map
+            int state = 0; // the state the loop is in, start with the upstairs then downstairs and then to chests
+            int chestCount = 0;
             while (state != 10)
             {
                 for (int testing = 0; testing < 1000; testing++)
@@ -604,7 +601,7 @@ namespace DungeonGenerator
                     {
                         if (ways == 0)
                         {
-                            // we're in state 0, let's place a "upstairs" thing
+                            // we're in state 0, so we place the upstairs
                             this.SetCell(newx, newy, Tile.Upstairs);
                             state = 1;
                             break;
@@ -616,8 +613,23 @@ namespace DungeonGenerator
                         {
                             // state 1, place a "downstairs"
                             this.SetCell(newx, newy, Tile.Downstairs);
-                            state = 10;
+                            state = 2;
                             break;
+                        }
+                    }
+                    else if (state == 2)
+                    {
+                        if (ways == 0 && GetCellType(newx, newy) == Tile.DirtFloor)
+                        {
+                            // Place chests on dirt floor
+                            this.SetCell(newx, newy, Tile.Chest);
+                            chestCount--;
+
+                            if (chestCount <= 0)
+                            {
+                                state = 10; // End once all chests are placed
+                                break;
+                            }
                         }
                     }
                 }
