@@ -1,0 +1,5 @@
+- add chests to the generation (I forgot to add it)
+
+- make it fill out and be more planned out 
+
+- make a game using it 
