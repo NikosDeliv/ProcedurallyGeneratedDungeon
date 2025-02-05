@@ -19,7 +19,8 @@ Visual Studio or any C#-compatible IDE
 
 ## Example Dungeon
 
-![Dungeon](https://github.com/user-attachments/assets/e4fb5f90-7e83-424f-8e03-59505fb186e5)
+![Dungeon](https://github.com/user-attachments/assets/2e279561-a5ea-45c2-b394-2fee6511d290)
+
 
 ## Dungeon Symbols
 ```C#
@@ -31,5 +32,6 @@ Visual Studio or any C#-compatible IDE
 'D'  → Door  
 '+'  → Upstairs  
 '-'  → Downstairs  
-'C'  → Chest  
+'C'  → Chests
+'T'  → Traps
 ```
