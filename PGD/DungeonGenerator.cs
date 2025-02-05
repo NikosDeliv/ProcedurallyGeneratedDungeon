@@ -50,6 +50,7 @@ namespace DungeonGenerator
             Downstairs,
             Chest,
             Door,
+            Trap,
             Corridor
         }
         public enum Direction // the directions
@@ -344,6 +345,8 @@ namespace DungeonGenerator
                     return '-';
                 case Tile.Chest:
                     return 'C';
+                case Tile.Trap:
+                    return 'T';
                 default:
                     throw new ArgumentOutOfRangeException("x,y");
             }
@@ -557,8 +560,9 @@ namespace DungeonGenerator
         void AddSprinkles()
         {
             // sprinkle out the bonusstuff over the map
-            int state = 0; // the state the loop is in, start with the upstairs then downstairs and then to chests
-            int chestCount = 0;
+            int state = 0; // the state the loop is in, start with the upstairs (0) then downstairs (1)  then to chests (2) and lastly traps (3)
+            int chestCount = 3; // amount of chests that spawn
+            int trapCount = 5; // amount of traps that spawn
             while (state != 10)
             {
                 for (int testing = 0; testing < 1000; testing++)
@@ -627,10 +631,26 @@ namespace DungeonGenerator
 
                             if (chestCount <= 0)
                             {
-                                state = 10; // End once all chests are placed
+                                state = 3; // End once all chests are placed and move on to the traps
                                 break;
                             }
                         }
+                    }
+                    else if (state == 3)
+                    {
+                        if (ways == 0 && GetCellType(newx, newy) == Tile.DirtFloor)
+                        {
+                            // place the traps 
+                            this.SetCell(newx, newy, Tile.Trap);
+                            trapCount--;
+
+                            if(trapCount <= 0)
+                            {
+                                state = 10; //end the gen
+                                break;
+                            }
+                        }
+
                     }
                 }
             }
