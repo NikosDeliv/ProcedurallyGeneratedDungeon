@@ -1,5 +1,10 @@
-- add chests to the generation (I forgot to add it)
+- add chests to the generation - Done
+- add traps to the generation - Done
 
 - make it fill out and be more planned out 
+    - Make it so it fills out and gets 
+      more complete with the stone walls
+    - No dead end corridors / Corridors always lead to doors that go into rooms
+    
 
 - make a game using it 
