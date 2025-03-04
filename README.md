@@ -18,15 +18,15 @@ Efficient Randomization: Implements an IRandomize interface for flexible and reu
 Visual Studio or any C#-compatible IDE
 
 ## Example Dungeon
+![Dungeon](https://github.com/user-attachments/assets/9b44d5d8-09da-452d-8396-70af53bfc7e6)
 
-![Dungeon](https://github.com/user-attachments/assets/2e279561-a5ea-45c2-b394-2fee6511d290)
 
 
 ## Dungeon Symbols
 ```C#
-' '  → Unused space  
-'#'  → Dirt Wall  
-'.'  → Dirt Floor  
+'█'  → Unused space  
+'█'  → Dirt Wall  
+' '  → Dirt Floor  
 'S'  → Stone Wall  
 '='  → Corridor  
 'D'  → Door  
@@ -35,3 +35,19 @@ Visual Studio or any C#-compatible IDE
 'C'  → Chests
 'T'  → Traps
 ```
+
+if you want to change the size and play with the dimensions mess around with these lines
+
+```C#
+ // Call dungeon generation method
+ dungeon.CreateDungeon(100, 100, 100); // dimensions and object count
+```
+
+```C#
+  // max size of the map
+  int xmax = 80; //columns
+  int ymax = 50; //rows
+```
+
+
+
