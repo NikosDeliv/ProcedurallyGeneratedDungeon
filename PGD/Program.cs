@@ -19,7 +19,7 @@ namespace DungeonGenerator
             Dungeon dungeon = new Dungeon(rnd, logger);
 
             // Call dungeon generation method
-            dungeon.CreateDungeon(100, 100, 20); // dimensions and object count
+            dungeon.CreateDungeon(100, 100, 100); // dimensions and object count
 
             // Display the dungeon map
             dungeon.ShowDungeon();

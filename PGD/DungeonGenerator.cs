@@ -7,9 +7,9 @@ using System.Numerics;
 
 namespace DungeonGenerator
 {
-   
+
     public class Dungeon
-      {
+    {
 
         const string MsgXSize = "X size of dungeon: \t";
 
@@ -21,7 +21,7 @@ namespace DungeonGenerator
 
         // max size of the map
         int xmax = 80; //columns
-        int ymax = 30; //rows
+        int ymax = 50; //rows
 
         // size of the map
         int _xsize;
@@ -31,7 +31,7 @@ namespace DungeonGenerator
         int _objects;
 
         // define the chance to generate either a room or a corridor on the map, room is high prio so I only do that
-       
+
         const int ChanceRoom = 75;
 
         // the map
@@ -328,15 +328,15 @@ namespace DungeonGenerator
             switch (GetCellType(x, y))
             {
                 case Tile.Unused:
-                    return ' ';
+                    return '█';
                 case Tile.DirtWall:
-                    return '#';
+                    return '█';
                 case Tile.DirtFloor:
-                    return '.';
+                    return ' ';
                 case Tile.StoneWall:
                     return 'S';
                 case Tile.Corridor:
-                    return '=';
+                    return ' ';
                 case Tile.Door:
                     return 'D';
                 case Tile.Upstairs:
@@ -387,7 +387,7 @@ namespace DungeonGenerator
         //and here's the one generating the whole map
         public bool CreateDungeon(int inx, int iny, int inobj)
         {
-            this._objects = inobj < 1 ? 10 : inobj;
+            this._objects = inobj < 1 ? 100 : inobj;
 
             // adjust the size of the map, if it's smaller or bigger than the limits
             if (inx < 3) this._xsize = 3;
@@ -409,7 +409,7 @@ namespace DungeonGenerator
             this.Initialize();
 
             // start with making a room in the middle, which we can start building upon
-            this.MakeRoom(this._xsize / 2, this._ysize / 2, 8, 6, RandomDirection()); 
+            this.MakeRoom(this._xsize / 2, this._ysize / 2, 8, 6, RandomDirection());
 
             // keep count of the number of "objects" we've made
             int currentFeatures = 1; // +1 for the first room we just made
@@ -523,11 +523,14 @@ namespace DungeonGenerator
                 }
             }
 
-            
+
             AddSprinkles();
 
             // all done with the map generation, tell the user about it and finish
             Console.WriteLine(MsgNumObjects + currentFeatures);
+            this.ShowDungeon();
+            Console.WriteLine("Press Enter to exit...");
+            Console.ReadLine();
 
             return true;
         }
@@ -644,7 +647,7 @@ namespace DungeonGenerator
                             this.SetCell(newx, newy, Tile.Trap);
                             trapCount--;
 
-                            if(trapCount <= 0)
+                            if (trapCount <= 0)
                             {
                                 state = 10; //end the gen
                                 break;
