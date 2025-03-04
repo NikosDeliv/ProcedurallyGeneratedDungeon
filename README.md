@@ -28,7 +28,7 @@ Visual Studio or any C#-compatible IDE
 '█'  → Dirt Wall  
 ' '  → Dirt Floor  
 'S'  → Stone Wall  
-'='  → Corridor  
+' '  → Corridor  
 'D'  → Door  
 '+'  → Upstairs  
 '-'  → Downstairs  
