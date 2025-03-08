@@ -1,6 +1,6 @@
 ## Procedurally Generated Dungeon
 
-This project is a C# implementation of a procedurally generated dungeon using .NET 8. The dungeon layout is randomly generated, creating unique structures each time the program runs.
+This project is a C# implementation of a procedurally generated dungeon using .NET 8. The dungeon layout is randomly generated, creating unique structures each time the program runs. The comments were added with the use of AI
 
 ## Features
 
